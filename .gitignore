@@ -36,8 +36,11 @@ ENV/
 env.bak/
 venv.bak/
 
-# VS Code
+# VS Code and IDE settings
 .vscode/
+.idea/
+*.code-workspace
+.vs/
 
 # Large data files
 data/
