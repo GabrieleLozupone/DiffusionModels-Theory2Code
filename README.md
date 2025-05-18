@@ -34,7 +34,7 @@ The content is organized into a series of modules, each building on the previous
 │   ├── MNIST/         # MNIST dataset
 │   └── celeba/        # CelebA dataset
 ├── experiments/       # Outputs from training runs
-│   └── celeba_64x64_diffusers/ # Example experiment outputs
+│   └── celeba_64x64/ # Example experiment outputs
 └── images/            # Supporting images for documentation
 ```
 
@@ -56,6 +56,14 @@ The content is organized into a series of modules, each building on the previous
    ```bash
    pip install -r requirements.txt
    ```
+
+4. Download pre-trained models (optional):
+   
+   All pre-trained models from the `models/` directory can be downloaded from the following Google Drive link:
+   
+   [Download Pre-trained Models](https://drive.google.com/drive/folders/1BPUNJdd0IoTqa_03ssjvlfDAev9YdmOQ?usp=sharing)
+   
+   Download and place the models in the `models/` directory to skip training and use them directly.
 
 ## 👩‍💻 Usage Guide
 

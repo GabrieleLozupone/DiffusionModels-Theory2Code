@@ -279,7 +279,7 @@ if __name__ == "__main__":
     
     # Paths and Naming
     parser.add_argument("--experiment_name", type=str, default="celeba_64x64", help="Name for the experiment run")
-    parser.add_argument("--data_root", type=str, default="/ssd1/lozupone/dataset/", help="Root directory of CelebA dataset")
+    parser.add_argument("--data_root", type=str, default="data", help="Root directory of CelebA dataset")
     parser.add_argument("--output_dir", type=str, default="experiments", help="Base directory for saving outputs (images, logs)")
     parser.add_argument("--model_dir", type=str, default="celeba_models", help="Base directory for saving model checkpoints and final models")
     parser.add_argument("--download_data", action="store_true", help="Download CelebA dataset if not found")

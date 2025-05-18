@@ -37,6 +37,8 @@ Classifier guidance, introduced by Dhariwal and Nichol (2021), uses a separate, 
 
 #### The Core Idea: Modifying the Score
 
+<img src="images/classifier_guidance.png" width="100%">
+
 The goal is to sample from the conditional distribution $p(x_t|y)$. Using Bayes' theorem:
 
 $$ p(x_t|y) = \frac{p(y|x_t)p(x_t)}{p(y)} $$
