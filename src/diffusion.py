@@ -38,6 +38,39 @@ class DiffusionProcess:
         corrupted_batch = sqrt_alpha_bar_t * batch + sqrt_one_minus_alpha_bar_t * noise
         return corrupted_batch, noise  # Return both corrupted image and noise for training
 
+    def p_sample(self, x, t_idx, predicted_noise):
+        """
+        Perform a single reverse diffusion step (p_sample).
+        Args:
+            x (torch.Tensor): The current noisy image (xt).
+            t_idx (int): The current timestep index.
+            predicted_noise (torch.Tensor): The noise predicted by the model.
+        Returns:
+            torch.Tensor: The less noisy image (xt-1).
+        """
+        # Ensure t_idx is an integer for indexing
+        if isinstance(t_idx, torch.Tensor):
+            t_idx = t_idx.item() # Convert to scalar Python int if it's a tensor
+
+        alpha_t = self.alpha[t_idx]
+        alpha_bar_t = self.alpha_bar[t_idx]
+        beta_t = self.beta_schedule[t_idx]
+
+        # No noise at timestep 0 (final step)
+        if t_idx > 0:
+            noise_z = torch.randn_like(x)
+        else:
+            noise_z = torch.zeros_like(x) # No noise added at the last step
+
+        # Compute the mean for the reverse process
+        # x_{t-1} = 1/sqrt(alpha_t) * (x_t - beta_t / sqrt(1-alpha_bar_t) * predicted_noise) + sqrt(beta_t) * z
+        term1 = 1 / torch.sqrt(alpha_t)
+        term2 = x - (beta_t / torch.sqrt(1 - alpha_bar_t)) * predicted_noise
+        term3 = torch.sqrt(beta_t) * noise_z
+        
+        x_prev = term1 * term2 + term3
+        return x_prev
+
     def sample(self, model, n_samples, device, size=(1, 32, 32)):
         """
         Sample new images using the trained model.
